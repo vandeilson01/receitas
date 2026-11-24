@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forno da Vó — Receitas de Bolos</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,500&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:oklch(.97 .02 75);--fg:oklch(.28 .04 40);--card:oklch(.99 .01 80);--pri:oklch(.58 .15 35);--muted:oklch(.5 .04 45);--acc:oklch(.45 .08 60);--bd:oklch(.88 .03 70)}
+*{box-sizing:border-box;margin:0}body{font-family:Nunito,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+.d{font-family:Fraunces,serif;font-weight:500}.w{max-width:1000px;margin:auto;padding:0 24px}
+header{text-align:center;padding:80px 0 50px}.k{letter-spacing:.3em;text-transform:uppercase;font-size:13px;color:var(--pri)}
+h1{font-size:clamp(40px,8vw,72px);line-height:1.1;margin-top:14px}em{color:var(--pri)}.lead{color:var(--muted);font-size:18px;max-width:560px;margin:22px auto 0}
+.g{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));padding-bottom:90px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px;cursor:pointer;transition:.2s;box-shadow:0 4px 20px -8px #8a4b2a33;text-decoration:none;color:inherit;display:block}
+.c:hover{transform:translateY(-4px);box-shadow:0 16px 40px -12px #c0552a59}.c:hover h2{color:var(--pri)}
+.n{font-size:36px;color:var(--pri);opacity:.4}.c h2{font-size:24px;margin-top:8px}.c p{color:var(--muted)}.t{font-size:14px;color:var(--acc);margin-top:14px}
+.r{max-width:760px;padding:60px 24px}.r a{color:var(--pri);text-decoration:none}.r h1{font-size:48px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:32px;margin-top:36px}h3{color:var(--pri);font-size:24px}
+ul,ol{list-style:none;padding:0;margin-top:14px}li{display:flex;gap:12px;margin-bottom:12px}
+.s{flex:none;width:32px;height:32px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:14px}
+</style></head><body><div id="app"></div>
+<script>
+const recipes=[
+  { slug: "bolo-de-cenoura", name: "Bolo de Cenoura", desc: "Fofinho, com cobertura de chocolate brilhante.", time: "50 min", serves: "12 fatias",
+    ingredients: ["3 cenouras médias", "4 ovos", "1 xícara de óleo", "2 xícaras de açúcar", "2 1/2 xícaras de farinha de trigo", "1 colher (sopa) de fermento", "Cobertura: 4 colheres de chocolate em pó, 1 colher de manteiga, 1 xícara de açúcar, 1/2 xícara de leite"],
+    steps: ["Bata no liquidificador as cenouras, os ovos e o óleo.", "Em uma tigela, misture o açúcar e a farinha e junte o creme batido.", "Acrescente o fermento delicadamente.", "Asse em forma untada a 180 °C por cerca de 40 minutos.", "Ferva os ingredientes da cobertura até engrossar e despeje sobre o bolo."] },
+  { slug: "bolo-de-chocolate", name: "Bolo de Chocolate", desc: "Úmido e intenso, com brigadeiro por cima.", time: "1 h", serves: "14 fatias",
+    ingredients: ["3 ovos", "1 xícara de açúcar", "1 xícara de chocolate em pó", "1/2 xícara de óleo", "1 xícara de água quente", "2 xícaras de farinha de trigo", "1 colher (sopa) de fermento", "Brigadeiro: 1 lata de leite condensado, 2 colheres de chocolate, 1 colher de manteiga"],
+    steps: ["Misture ovos, açúcar, óleo e chocolate.", "Junte a farinha alternando com a água quente.", "Adicione o fermento e misture.", "Asse a 180 °C por 35 a 40 minutos.", "Cozinhe o brigadeiro até desgrudar da panela e cubra o bolo."] },
+  { slug: "bolo-de-fuba", name: "Bolo de Fubá", desc: "O clássico da tarde, perfeito com café.", time: "45 min", serves: "10 fatias",
+    ingredients: ["3 ovos", "1 xícara de leite", "1/2 xícara de óleo", "1 1/2 xícara de açúcar", "1 xícara de fubá", "1 xícara de farinha de trigo", "1 colher (sopa) de fermento", "Erva-doce a gosto"],
+    steps: ["Bata ovos, leite, óleo e açúcar.", "Acrescente o fubá e a farinha e bata até ficar liso.", "Misture o fermento e a erva-doce.", "Asse a 180 °C por 35 minutos."] },
+  { slug: "bolo-de-laranja", name: "Bolo de Laranja", desc: "Cítrico e perfumado, com calda de laranja.", time: "50 min", serves: "12 fatias",
+    ingredients: ["2 laranjas com casca (sem sementes)", "4 ovos", "3/4 xícara de óleo", "2 xícaras de açúcar", "2 1/2 xícaras de farinha de trigo", "1 colher (sopa) de fermento", "Calda: suco de 2 laranjas e 1/2 xícara de açúcar"],
+    steps: ["Bata as laranjas picadas com ovos e óleo.", "Misture com o açúcar e a farinha.", "Junte o fermento.", "Asse a 180 °C por 40 minutos.", "Ferva o suco com açúcar e regue o bolo ainda quente."] },
+  { slug: "bolo-de-banana", name: "Bolo de Banana", desc: "Com canela e pedaços de banana caramelizada.", time: "55 min", serves: "12 fatias",
+    ingredients: ["4 bananas maduras", "3 ovos", "1/2 xícara de óleo", "1 xícara de açúcar mascavo", "2 xícaras de farinha de trigo", "1 colher (chá) de canela", "1 colher (sopa) de fermento"],
+    steps: ["Amasse 3 bananas e misture com ovos, óleo e açúcar.", "Junte farinha e canela.", "Adicione o fermento.", "Coloque na forma e cubra com a banana restante em rodelas.", "Asse a 180 °C por 40 minutos."] },
+  { slug: "bolo-de-coco", name: "Bolo de Coco Gelado", desc: "Molhadinho, servido gelado em pedaços.", time: "1 h + geladeira", serves: "16 pedaços",
+    ingredients: ["4 ovos", "2 xícaras de açúcar", "1 xícara de leite", "2 xícaras de farinha de trigo", "1 colher (sopa) de fermento", "Calda: 1 vidro de leite de coco, 1 lata de leite condensado, 100 g de coco ralado"],
+    steps: ["Bata claras em neve e reserve.", "Bata gemas com açúcar, junte leite e farinha.", "Incorpore as claras e o fermento.", "Asse a 180 °C por 35 minutos.", "Fure o bolo, regue com a calda, cubra com coco e leve à geladeira por 4 horas."] },
+];
+const app=document.getElementById('app');
+function home(){app.innerHTML=`<header class="w"><p class="k">Forno da Vó</p><h1 class="d">Receitas de bolos<br><em>feitos em casa</em></h1><p class="lead">Bolos simples, com cheiro de tarde de domingo. Escolha um e vá para o forno.</p></header><section class="w g">${recipes.map((r,i)=>`<a class="c" href="#${r.slug}"><span class="d n">${String(i+1).padStart(2,'0')}</span><h2 class="d">${r.name}</h2><p>${r.desc}</p><p class="t">⏱ ${r.time} · ${r.serves}</p></a>`).join('')}</section>`}
+function recipe(r){app.innerHTML=`<main class="w r"><a href="#">← Todas as receitas</a><h1 class="d" style="margin-top:24px">${r.name}</h1><p class="lead" style="margin:10px 0 0">${r.desc}</p><p class="t">⏱ ${r.time} · ${r.serves}</p><div class="box"><h3 class="d">Ingredientes</h3><ul>${r.ingredients.map(x=>`<li><span style="color:var(--pri)">•</span>${x}</li>`).join('')}</ul></div><div style="margin-top:36px"><h3 class="d">Modo de preparo</h3><ol>${r.steps.map((s,i)=>`<li><span class="s">${i+1}</span><span style="padding-top:3px">${s}</span></li>`).join('')}</ol></div></main>`}
+function route(){const r=recipes.find(x=>x.slug===location.hash.slice(1));r?recipe(r):home();scrollTo(0,0)}
+addEventListener('hashchange',route);route();
+</script></body></html>
